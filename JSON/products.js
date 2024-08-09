@@ -1,0 +1,86 @@
+const products = [
+  {
+    id: 1,
+    name: "Vitamin B moisturiser",
+    description:
+      "A light weight, moisturiser-meets-sunscreen. This broad spectrum SPF 50 with PA++++ rating, has a very light texture that spreads easily & disappears leaving behind a natural, moisturised, non-shiny look. Loaded with Vitamins A, B, E & F that help repair skin and minimise damage caused by UV exposure.",
+    review:
+      "This is the lightest moisturizer I've ever used! It suits my skin well no whitecast no sticky feeling absorbs quickly",
+    image1: "../images/img-5.avif",
+    image2: "../images/img-6.avif",
+    image3: "../images/img-5.avif",
+    rating: 4.5,
+    price: 450,
+    discountedPrice: 390,
+  },
+  {
+    id: 2,
+    name: "SPF 50 Sunscreen",
+    description:
+      "A light weight, moisturiser-meets-sunscreen. This broad spectrum SPF 50 with PA++++ rating, has a very light texture that spreads easily & disappears leaving behind a natural, moisturised, non-shiny look. Loaded with Vitamins A, B, E & F that help repair skin and minimise damage caused by UV exposure.",
+    review:
+      "This is the best sunscreen I've come across to. It suits my skin well no whitecast no sticky feeling absorbs quickly.",
+    image1: "../images/sunscreen-1.avif",
+    image2: "../images/sunscreen-2.avif",
+    image3: "../images/sunscreen-3.avif",
+    rating: 4.7,
+    price: 470,
+    discountedPrice: 399,
+  },
+  {
+    id: 3,
+    name: "Salicylic Acid Cleanser",
+    description:
+      "A daily, gentle exfoliating, acne fighting face cleanser. It combines BHA + LHA (Salicylic Acid + Capryloyl Salicylic Acid) in 2% concentration, which provides deep cleansing, pore decongestion & sebum reduction without drying out the skin.",
+    review:
+      "I have seen a reduction in acne and oiliness ever since I started using this face cleanser -Nikhil V.",
+    image1: "../images/img-1.avif",
+    image2: "../images/img-2.avif",
+    image3: "../images/salycilic-acid-3.avif",
+    rating: 4.9,
+    price: 620,
+    discountedPrice: 620,
+  },
+  {
+    id: 4,
+    name: "Light Fluid SPF 50",
+    description:
+      "A lightweight, water-resistant SPF 50 Sunscreen, with an innovative formulation to protect against UVA / UVB rays. Easy to spread texture for a natural, hydrated, shine-free finish leaving no white cast. Packed with UV filters like Tinosorb M, Uvinul A plus and OMC, to help repair and minimize UV damage",
+    review:
+      "Absorbs quickly, does not leave any white cast. Very thin texture, no smell and fantastic product - Mahamaya",
+    image1: "../images/img-7.avif",
+    image2: "../images/img-6.avif",
+    image3: "../images/img-8.avif",
+    rating: 4.9,
+    price: 499,
+    discountedPrice: 499,
+  },
+  {
+    id: 5,
+    name: "Hair Serum SPF 30",
+    description:
+      "This powerful hair serum fights frizz, strengthens hair, and boosts shine with a triple threat: Keratin, Ceramide, and Argan Oil. Keratin fills gaps for manageability, Ceramide repairs for shine, and Argan Oil nourishes. This lightweight formula with SPF 30 protects from sun damage & provides smooth, soft, and frizz-free hair.",
+    review:
+      "Reduces frizz, smoothens & protects from UV. Does not make hair look oily, lasts easily for about 6hours.",
+    image1: "../images/Frizz-1.avif",
+    image2: "../images/Frizz-2.avif",
+    image3: "../images/Frizz-3.avif",
+    rating: 3.1,
+    price: 690,
+    discountedPrice: 500,
+  },
+  {
+    id: 6,
+    name: "Anti Dandruff Serum",
+    description:
+      "Our specialised Anti-Dandruff Serum provides targeted relief from dandruff and gives a nourished, healthy scalp. High active concentration in a non-greasy formula containing Climbazole, Piroctone Olamine, Elestab & Oligopeptide-29, combats dandruff-causing fungus. It also contains Capryloyl Glycine to control excess sebum and Salicylic Acid for gentle exfoliation.",
+    review:
+      "I have seen significant reduction in dandruf flakes after using it for 2 months. Takes time but worth being consistent.",
+    image1: "../images/dandruf-1.avif",
+    image2: "../images/dandruf-2.avif",
+    image3: "../images/dandruf-3.avif",
+    rating: 3.6,
+    price: 350,
+    discountedPrice: 299,
+  },
+];

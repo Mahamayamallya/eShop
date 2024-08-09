@@ -1,0 +1,66 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+html,
+body {
+  height: 100%;
+  margin-top: 30px;
+}
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+footer {
+  margin-bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.baby-banner {
+  background-color: #fb6900;
+}
+.sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.nav-link,
+.nav-form {
+  margin-right: 15px;
+}
+.home-banner {
+  height: 70vh;
+}
+.content .card {
+  border: none;
+}
+.container {
+  overflow-x: hidden;
+}
+.add-to-cart {
+  width: 100%;
+  border-radius: 0;
+}
+.btn-100 {
+  width: 100%;
+}
+.cart-img {
+  height: 120px;
+  width: auto;
+}
+.pdp-card {
+  border: none;
+  padding: 0;
+}
+.pdp-card > .card-body {
+  padding: 0;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+.right-align {
+  text-align: end;
+}

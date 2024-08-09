@@ -1,0 +1,54 @@
+<div class="container my-5 p-0">
+    <h5 class="mt-5">Shopping Bag</h5>
+    <div class="row my-4">
+      <div class="col-md-8 p-0">
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            style="background-color: rgb(222, 222, 222)"
+          >
+            <div class="row text-center">
+              <div class="col-5">Product</div>
+              <div class="col-5">Quantity</div>
+              <div class="col-2">Total</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-light">
+           <div id="display-cart-item">
+            <div class="row">
+              <div class="col-5 p-0 text-center">
+                <img src="../images/dandruf-1.avif" class="cart-img" alt="" />
+                <p class="my-0">Anti Dandruff Serum</p>
+                <p class="text-muted">&#8377 1000</p>
+              </div>
+              <div class="col-5 text-center pt-3">
+                <p>1</p>
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="quantity-update"
+                >
+                  <button type="button" class="btn btn-outline-dark">
+                    -
+                  </button>
+                  <button type="button" class="btn btn-outline-dark">
+                    <i class="bi bi-trash3-fill"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-dark">
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="col-2 text-center pt-3"><p>&#8377 1000</p></div>
+            </div>
+           </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+    <!---------Order Summary------>
+      <div id="order-summary"></div>
+      <button class="btn btn-dark btn-lg btn-100 mt-3" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+  </div>
