@@ -118,26 +118,26 @@ window.addEventListener("DOMContentLoaded", function () {
 function loadCartItems(products) {
   let shoppingBag = document.getElementById("display-cart-item");
   let cartItemsCopy = JSON.parse(localStorage.getItem("cartItems")) || [];
-  alert("inside displayCart");
 
   if (shoppingBag) {
-    alert("shoppingBag is true");
     shoppingBag.innerHTML = "";
     console.log("cartItemsCopy: ", cartItemsCopy);
     cartItemsCopy.forEach((item) => {
       let product = getProductByID(item.id, products);
       console.log("product :", product);
+      let quantity = cartItemsCopy[item.id]["quantity"];
+      let itemTotal = product.price * quantity;
       if (product) {
         let cartItem = document.createElement("div");
         cartItem.className = "row";
         cartItem.innerHTML = ` 
             <div class="col-5 p-0 text-center">
               <img src="${product.image1}" class="cart-img" alt="" />
-              <p class="my-0">Anti Dandruff Serum</p>
-              <p class="text-muted">&#8377 1000</p>
+              <p class="my-0">${product.name}</p>
+              <p class="text-muted">&#8377 ${product.price}</p>
             </div>
             <div class="col-5 text-center pt-3">
-              <p>1</p>
+              <p>${quantity}</p>
               <div
                 class="btn-group"
                 role="group"
@@ -153,19 +153,17 @@ function loadCartItems(products) {
                 +
               </button>
             </div>
-            <div class="col-2 text-center pt-3"><p>&#8377 1000</p></div>`;
+            </div>
+            <div class="col-2 text-center pt-3"><p>&#8377 ${itemTotal}</p></div>`;
         shoppingBag.appendChild(cartItem);
       }
     });
   } else {
     console.warn("#display-cart-item not found");
   }
-
-  alert("ok done");
 }
 
 function displayCart() {
-  alert("cart button clicked");
   window.location.href = "../html/cart.html";
 }
 
