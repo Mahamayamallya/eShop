@@ -131,14 +131,22 @@ function displayProducts(productsCopy) {
   const productList = document.getElementById("product-list");
   productList.innerHTML = "";
 
-  productsCopy.forEach((product) => {
+  if (productsCopy.length === 0) {
     const productCard = document.createElement("div");
-    productCard.className = "col-md-3";
-    productCard.innerHTML = `
+    productCard.innerHTML = `<h5 class="text-center my-5">No such products found.</h5>`;
+
+    productList.appendChild(productCard);
+  }
+
+  if (productsCopy) {
+    productsCopy.forEach((product) => {
+      const productCard = document.createElement("div");
+      productCard.className = "col-md-3";
+      productCard.innerHTML = `
       <div class="card pdp-card my-5" style="width: 14rem;">
         <img src="${product.images[0]}" class="card-img-top" alt="${
-      product.name
-    }">
+        product.name
+      }">
         <div class="card-body text-center">
           <h5 class="card-title my-2">${product.name}</h5>
           <div class="row">
@@ -146,8 +154,8 @@ function displayProducts(productsCopy) {
             <div class="col"><p><small class="discountStyle text-mute">${
               product.discountPercentage > 0 ? product.price : ""
             }</small> &#8377 ${
-      product.price - (product.price * product.discountPercentage) / 100
-    }</p></div>
+        product.price - (product.price * product.discountPercentage) / 100
+      }</p></div>
           </div>
           <button class="add-to-cart btn btn-dark" data-id="${
             product.id
@@ -157,9 +165,10 @@ function displayProducts(productsCopy) {
       </div>
     `; //TODO: Update ratings
 
-    productList.appendChild(productCard);
-    //console.log("hiiiiooou");
-  });
+      productList.appendChild(productCard);
+      //console.log("hiiiiooou");
+    });
+  }
 }
 
 function checkout() {

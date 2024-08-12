@@ -67,3 +67,11 @@ footer {
 .discountStyle {
   text-decoration: line-through;
 }
+.container-small-screen {
+  padding-top: 20px;
+}
+@media only screen and (min-width: 500px) {
+  .container-small-screen {
+    padding-top: 40px;
+  }
+}

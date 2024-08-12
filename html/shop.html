@@ -23,10 +23,10 @@
       </p>
     </div>
     <!------------SKIN CARE------------->
-    <div class="container p-5">
+    <div class="container container-small-screen">
       <div class="filter-row row">
-        <div class="col-md-8">
-          <div class="dropdown">
+        <div class="col-6 col-md-2">
+          <div class="dropdown mb-2">
             <button
               class="btn btn-outline-dark dropdown-toggle"
               type="button"
@@ -50,6 +50,23 @@
                 <button class="dropdown-item" type="button">Ratings</button>
               </li>
               <li>
+                <button class="dropdown-item" type="button">On Sale</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-6 col-md-4">
+          <div class="dropdown mb-2">
+            <button
+              class="btn btn-outline-dark dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Filter By
+            </button>
+            <ul class="dropdown-menu">
+              <li>
                 <button class="dropdown-item" type="button">Rating-5</button>
               </li>
               <li>
@@ -62,13 +79,10 @@
                   Rating-Above 3
                 </button>
               </li>
-              <li>
-                <button class="dropdown-item" type="button">On Sale</button>
-              </li>
             </ul>
           </div>
         </div>
-        <div class="col ms-auto input-group">
+        <div class="col-6 col-md me-auto input-group pr-4">
           <input id="input-search" type="text" class="form-control" />
           <button class="btn btn-outline-secondary" onclick="searchProducts()">
             Search
