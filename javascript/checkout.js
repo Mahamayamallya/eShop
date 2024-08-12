@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (isValid) {
       alert("ORDER PLACED"); //TODO: payment COD checkbox, new popup window for "ORDER PLACED"
-      window.location.href = "index.html";
+      window.location.href = "../index.html";
+      localStorage.removeItem("cartItems");
     }
   });
 });

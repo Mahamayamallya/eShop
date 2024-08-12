@@ -15,14 +15,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex ms-auto nav-form" role="search">
+        <form class="d-flex ms-auto nav-form" role="search" id="search-form">
           <input
             class="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
+            id="search-input"
           />
-          <button class="btn btn-outline-dark" type="submit">Search</button>
+          <button class="btn btn-outline-dark" type="submit" id="search-query" onclick="searchProducts()">Search</button>
         </form>
         <ul class="navbar-nav  mb-2 mb-lg-0">
           <li class="nav-item">

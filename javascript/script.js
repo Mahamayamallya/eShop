@@ -4,6 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((products) => {
       displayProducts(products);
 
+      // const form = document.getElementById("search-form");
+      // const searchQuery = document
+      //   .getElementById("search-Query")
+      //   .value.toLowerCase();
+      // form.addEventListener("submit", function (event) {
+      //   event.preventDefault();
+      //   console.log(searchQuery);
+      //   const filteredProducts = products.filter((product) =>
+      //     product.name.toLowerCase().includes(searchQuery)
+      //   );
+      //   displayProducts(filteredProducts);
+      // });
+
       document.querySelectorAll(".dropdown-item").forEach((item) => {
         item.addEventListener("click", function () {
           let productsCopy = [...products];
@@ -21,9 +34,51 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       if (window.location.pathname.includes("cart.html")) {
         loadCartItems(products);
+        updateOrderSummary(products);
       }
     })
     .catch((error) => console.error("Error loading products:", error));
+});
+
+// function searchProducts() {
+//   console.log("searchProducts()");
+//   const searchInput = document
+//     .getElementById("search-input")
+//     .value.toLowerCase();
+//   console.log("hi", searchInput);
+
+//   fetch("../JSON/products.json")
+//     .then((response) => response.json())
+//     .then((products) => {
+//       const filteredProducts = products.filter((product) =>
+//         product.name.toLowerCase().includes(searchInput)
+//       );
+
+//       displayProducts(filteredProducts);
+//     })
+//     .catch((error) => console.error("Error searching products:", error));
+// }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("search-form");
+  const searchQuery = document
+    .getElementById("search-input")
+    .value.toLowerCase();
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log(searchQuery);
+
+    fetch("../JSON/products.json")
+      .then((response) => response.json())
+      .then((products) => {
+        const filteredProducts = products.filter((product) =>
+          product.name.toLowerCase().includes(searchInput)
+        );
+
+        displayProducts(filteredProducts);
+      })
+      .catch((error) => console.error("Error searching products:", error));
+  });
 });
 
 function displayProducts(productsCopy) {
@@ -62,6 +117,7 @@ function addToCart(productId) {
   if (productIndex !== -1) {
     //if the item already exists, then update its quantity.
     console.log("updating +1..");
+    console.log(cartItemsCopy[productIndex].quantity);
     cartItemsCopy[productIndex].quantity += 1;
     console.log("updated..");
     console.log(cartItemsCopy);
@@ -77,6 +133,8 @@ function addToCart(productId) {
     .then((response) => response.json())
     .then((products) => {
       updateCartIcon(products);
+      loadCartItems(products);
+      updateOrderSummary(products);
     })
     .catch((error) =>
       console.error(
@@ -106,6 +164,7 @@ window.addEventListener("DOMContentLoaded", function () {
     .then((products) => {
       updateCartIcon(products);
       loadCartItems(products);
+      updateOrderSummary(products);
     })
     .catch((error) =>
       console.error(
@@ -125,7 +184,7 @@ function loadCartItems(products) {
     cartItemsCopy.forEach((item) => {
       let product = getProductByID(item.id, products);
       console.log("product :", product);
-      let quantity = cartItemsCopy[item.id]["quantity"];
+      let quantity = item.quantity;
       let itemTotal = product.price * quantity;
       if (product) {
         let cartItem = document.createElement("div");
@@ -143,13 +202,13 @@ function loadCartItems(products) {
                 role="group"
                 aria-label="quantity-update"
               >
-              <button type="button" class="btn btn-outline-dark">
+              <button type="button" class="btn btn-outline-dark" onclick="updateCartItem(${product.id}, -1)">
                 -
               </button>
-              <button type="button" class="btn btn-outline-dark">
+              <button type="button" class="btn btn-outline-dark" onclick="updateCartItem(${product.id}, 0)">
                 <i class="bi bi-trash3-fill"></i>
               </button>
-              <button type="button" class="btn btn-outline-dark">
+              <button type="button" class="btn btn-outline-dark" onclick="updateCartItem(${product.id}, 1)">
                 +
               </button>
             </div>
@@ -162,11 +221,80 @@ function loadCartItems(products) {
     console.warn("#display-cart-item not found");
   }
 }
+function updateCartItem(productId, action) {
+  let cartItemsCopy = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let productIndex = cartItemsCopy.findIndex(
+    (cartItem) => cartItem.id === productId
+  );
 
+  if (productIndex !== -1 && action === 1) {
+    cartItemsCopy[productIndex].quantity += 1;
+  }
+  if (productIndex !== -1 && action === -1) {
+    cartItemsCopy[productIndex].quantity -= 1;
+    if (cartItemsCopy[productIndex].quantity === 0) {
+      cartItemsCopy.splice(productIndex, 1);
+    }
+  }
+  if (productIndex !== -1 && action === 0) {
+    cartItemsCopy.splice(productIndex, 1);
+    updateCartIcon();
+  }
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItemsCopy));
+
+  fetch("../JSON/products.json")
+    .then((response) => response.json())
+    .then((products) => {
+      updateCartIcon(products);
+      loadCartItems(products);
+      updateOrderSummary(products);
+    })
+    .catch((error) =>
+      console.error(
+        "Error loading products while calling updateCartItem(products):",
+        error
+      )
+    );
+}
 function displayCart() {
   window.location.href = "../html/cart.html";
 }
 
 function getProductByID(productId, products) {
   return products.find((product) => product.id === productId);
+}
+function updateOrderSummary(products) {
+  let cartItemsCopy = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  let subTotal = document.getElementById("sub-total");
+  let shippingCharge = document.getElementById("shipping-charge");
+  let tax = document.getElementById("tax");
+  let grandTotal = document.getElementById("grand-total");
+
+  let subtotal = 0;
+  let shippingcharge = 100;
+  let tax_;
+
+  // cartItemsCopy.map((item) => {
+  //   for (let i = 0; i < products.length; i++) {
+  //     if (item.id === products[i]["id"]) {
+  //       subtotal = subtotal + products[i]["price"];
+  //     }
+  //   }
+  // });
+  cartItemsCopy.forEach((item) => {
+    const product = products.find((product) => product.id === item.id);
+    if (product) {
+      subtotal += product.price * item.quantity;
+    }
+  });
+
+  tax_ = subtotal * 0.1;
+  const grandtotal = subtotal + shippingcharge + tax_;
+  if (subTotal) subTotal.innerText = `₹${subtotal.toFixed(2)}`;
+  if (shippingCharge)
+    shippingCharge.innerText = `₹${shippingcharge.toFixed(2)}`;
+  if (tax) tax.innerText = `₹${tax_.toFixed(2)}`;
+  if (grandTotal) grandTotal.innerText = `₹${grandtotal.toFixed(2)}`;
 }
