@@ -11,7 +11,8 @@ const products = [
     image3: "../images/img-5.avif",
     rating: 4.5,
     price: 450,
-    discountedPrice: 390,
+    // discountedPrice: 390,
+    discountPercentage: 10,
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ const products = [
     image3: "../images/sunscreen-3.avif",
     rating: 4.7,
     price: 470,
-    discountedPrice: 399,
+    // discountedPrice: 399,
+    discountPercentage: 10,
   },
   {
     id: 3,
@@ -39,7 +41,8 @@ const products = [
     image3: "../images/salycilic-acid-3.avif",
     rating: 4.9,
     price: 620,
-    discountedPrice: 620,
+    // discountedPrice: 620,
+    discountPercentage: 0,
   },
   {
     id: 4,
@@ -53,7 +56,8 @@ const products = [
     image3: "../images/img-8.avif",
     rating: 4.9,
     price: 499,
-    discountedPrice: 499,
+    // discountedPrice: 499,
+    discountPercentage: 0,
   },
   {
     id: 5,
@@ -67,7 +71,8 @@ const products = [
     image3: "../images/Frizz-3.avif",
     rating: 3.1,
     price: 690,
-    discountedPrice: 500,
+    // discountedPrice: 500,
+    discountPercentage: 10,
   },
   {
     id: 6,
@@ -81,6 +86,7 @@ const products = [
     image3: "../images/dandruf-3.avif",
     rating: 3.6,
     price: 350,
-    discountedPrice: 299,
+    // discountedPrice: 299,
+    discountPercentage: 10,
   },
 ];

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // const form = document.getElementById("search-form");
       // const searchQuery = document
-      //   .getElementById("search-Query")
+      //   .getElementById("search-input")
       //   .value.toLowerCase();
       // form.addEventListener("submit", function (event) {
       //   event.preventDefault();
@@ -21,14 +21,37 @@ document.addEventListener("DOMContentLoaded", function () {
         item.addEventListener("click", function () {
           let productsCopy = [...products];
           if (this.textContent.includes("Price Low to High")) {
-            productsCopy.sort((a, b) => a.discountedPrice - b.discountedPrice);
+            productsCopy.sort(
+              (a, b) =>
+                [a.price - (a.price * a.discountPercentage) / 100] -
+                [b.price - (b.price * b.discountPercentage) / 100]
+            );
           } else if (this.textContent.includes("Price High to Low")) {
-            productsCopy.sort((a, b) => b.discountedPrice - a.discountedPrice);
+            productsCopy.sort(
+              (a, b) =>
+                [b.price - (b.price * b.discountPercentage) / 100] -
+                [a.price - (a.price * a.discountPercentage) / 100]
+            );
           } else if (this.textContent.includes("On Sale")) {
             productsCopy = productsCopy.filter(
-              (product) => product.price > product.discountedPrice
+              (product) => product.discountPercentage !== 0
+            );
+          } else if (this.textContent.includes("Ratings")) {
+            productsCopy = productsCopy.sort((a, b) => b.rating - a.rating);
+          } else if (this.textContent.includes("Rating-Above 4")) {
+            productsCopy = productsCopy.filter(
+              (product) => product.rating >= 4
+            );
+          } else if (this.textContent.includes("Rating-Above 3")) {
+            productsCopy = productsCopy.filter(
+              (product) => product.rating >= 3
+            );
+          } else if (this.textContent.includes("Rating-5")) {
+            productsCopy = productsCopy.filter(
+              (product) => product.rating === 5
             );
           }
+
           displayProducts(productsCopy);
         });
       });
@@ -36,52 +59,75 @@ document.addEventListener("DOMContentLoaded", function () {
         loadCartItems(products);
         updateOrderSummary(products);
       }
+      if (window.location.pathname.includes("shop.html")) {
+        searchProducts();
+      }
     })
     .catch((error) => console.error("Error loading products:", error));
 });
+// function sayhi() {
+//   alert("hi");
+//   let key = document.getElementById("input-search").value;
+//   alert(key);
+// }
+function viewShop() {
+  window.location.href = "shop.html";
+}
+function searchProducts() {
+  console.log("iiiiiiiiiiiiiiiiiiii");
+  let filteredProducts =
+    JSON.parse(localStorage.getItem("filteredProducts")) || [];
+  const searchInput = document
+    .getElementById("input-search")
+    .value.toLowerCase();
+  console.log("hi", searchInput);
+  // alert(searchInput);
+  fetch("../JSON/products.json")
+    .then((response) => response.json())
+    .then((products) => {
+      filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchInput)
+      );
+      localStorage.setItem(
+        "filteredProducts",
+        JSON.stringify(filteredProducts)
+      );
+      console.log(filteredProducts);
+      displayProducts(filteredProducts);
+    })
+    .catch((error) => console.error("Error searching products:", error));
+}
 
-// function searchProducts() {
-//   console.log("searchProducts()");
-//   const searchInput = document
+// document.addEventListener("DOMContentLoaded", function () {
+//   const form = document.getElementById("search-form");
+//   const searchQuery = document
 //     .getElementById("search-input")
 //     .value.toLowerCase();
-//   console.log("hi", searchInput);
+//   form.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     console.log(searchQuery);
 
-//   fetch("../JSON/products.json")
-//     .then((response) => response.json())
-//     .then((products) => {
-//       const filteredProducts = products.filter((product) =>
-//         product.name.toLowerCase().includes(searchInput)
-//       );
+//     fetch("../JSON/products.json")
+//       .then((response) => response.json())
+//       .then((products) => {
+//         const filteredProducts = products.filter((product) =>
+//           product.name.toLowerCase().includes(searchInput)
+//         );
 
-//       displayProducts(filteredProducts);
-//     })
-//     .catch((error) => console.error("Error searching products:", error));
-// }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("search-form");
-  const searchQuery = document
-    .getElementById("search-input")
-    .value.toLowerCase();
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    console.log(searchQuery);
-
-    fetch("../JSON/products.json")
-      .then((response) => response.json())
-      .then((products) => {
-        const filteredProducts = products.filter((product) =>
-          product.name.toLowerCase().includes(searchInput)
-        );
-
-        displayProducts(filteredProducts);
-      })
-      .catch((error) => console.error("Error searching products:", error));
-  });
-});
+//         displayProducts(filteredProducts);
+//       })
+//       .catch((error) => console.error("Error searching products:", error));
+//   });
+// });
 
 function displayProducts(productsCopy) {
+  // const searchProducts = JSON.parse(localStorage.getItem("filteredProducts"));
+  // console.log("searchProducts : ", searchProducts);
+
+  // if (searchProducts && searchProducts > 0) {
+  //   alert(searchProducts[0].name);
+  // }
+  console.log("productsCopy", productsCopy);
   const productList = document.getElementById("product-list");
   productList.innerHTML = "";
 
@@ -90,30 +136,43 @@ function displayProducts(productsCopy) {
     productCard.className = "col-md-3";
     productCard.innerHTML = `
       <div class="card pdp-card my-5" style="width: 14rem;">
-        <img src="${product.image1}" class="card-img-top" alt="${product.name}">
+        <img src="${product.images[0]}" class="card-img-top" alt="${
+      product.name
+    }">
         <div class="card-body text-center">
           <h5 class="card-title my-2">${product.name}</h5>
           <div class="row">
-            <div class="col"><p>&#9733 ${product.rating}/5</p></div>
-            <div class="col"><p>&#8377 ${product.discountedPrice}</p></div>
+            <div class="col"><p>&#9733 ${product.rating}</p></div> 
+            <div class="col"><p><small class="discountStyle text-mute">${
+              product.discountPercentage > 0 ? product.price : ""
+            }</small> &#8377 ${
+      product.price - (product.price * product.discountPercentage) / 100
+    }</p></div>
           </div>
-          <button class="add-to-cart btn btn-dark" data-id="${product.id}" onclick ="addToCart(${product.id})">Add to Cart</button>
+          <button class="add-to-cart btn btn-dark" data-id="${
+            product.id
+          }" onclick ="addToCart(${product.id})">Add to Cart</button>
+          <p class="add-to-cart-msg"></p>
         </div>
       </div>
-    `;
+    `; //TODO: Update ratings
+
     productList.appendChild(productCard);
+    //console.log("hiiiiooou");
   });
 }
 
 function checkout() {
-  window.location.href = "checkout.html";
+  window.location.href = "../html/checkout.html";
 }
 
 function addToCart(productId) {
   let cartItemsCopy = JSON.parse(localStorage.getItem("cartItems")) || []; //get hold of cartItems or initialize it
 
   let productIndex = cartItemsCopy.findIndex((item) => item.id === productId);
-
+  const button = event.target;
+  const productCard = button.closest(".card");
+  const addToCartMsg = productCard.querySelector(".add-to-cart-msg");
   if (productIndex !== -1) {
     //if the item already exists, then update its quantity.
     console.log("updating +1..");
@@ -121,9 +180,17 @@ function addToCart(productId) {
     cartItemsCopy[productIndex].quantity += 1;
     console.log("updated..");
     console.log(cartItemsCopy);
+    addToCartMsg.textContent = "Added to cart!";
+    setTimeout(() => {
+      addToCartMsg.textContent = "";
+    }, 1000);
   } else {
     //if the item does not exist, create a new array element.
     cartItemsCopy.push({ id: productId, quantity: 1 });
+    addToCartMsg.textContent = "Added to cart!";
+    setTimeout(() => {
+      addToCartMsg.textContent = "";
+    }, 1000);
   }
 
   //update the local storage

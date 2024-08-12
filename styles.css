@@ -64,3 +64,6 @@ footer {
 .right-align {
   text-align: end;
 }
+.discountStyle {
+  text-decoration: line-through;
+}

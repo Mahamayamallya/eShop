@@ -7,9 +7,14 @@
     "image1": "../images/img-5.avif",
     "image2": "../images/img-6.avif",
     "image3": "../images/img-5.avif",
+    "images": [
+      "../images/img-5.avif",
+      "../images/img-6.avif",
+      "../images/img-5.avif"
+    ],
     "rating": 4.5,
     "price": 450,
-    "discountedPrice": 390
+    "discountPercentage": 10
   },
   {
     "id": 2,
@@ -19,9 +24,14 @@
     "image1": "../images/sunscreen-1.avif",
     "image2": "../images/sunscreen-2.avif",
     "image3": "../images/sunscreen-3.avif",
+    "images": [
+      "../images/sunscreen-1.avif",
+      "../images/sunscreen-2.avif",
+      "../images/sunscreen-3.avif"
+    ],
     "rating": 4.7,
     "price": 470,
-    "discountedPrice": 399
+    "discountPercentage": 10
   },
   {
     "id": 3,
@@ -31,10 +41,14 @@
     "image1": "../images/img-1.avif",
     "image2": "../images/img-2.avif",
     "image3": "../images/salycilic-acid-3.avif",
-    "rating": 4.9,
+    "rating": 5,
+    "images": [
+      "../images/img-1.avif",
+      "../images/img-2.avif",
+      "../images/salycilic-acid-3.avif"
+    ],
     "price": 620,
-    "discountedPrice": 620,
-    "quantity": 0
+    "discountPercentage": 0
   },
   {
     "id": 4,
@@ -45,8 +59,13 @@
     "image2": "../images/img-6.avif",
     "image3": "../images/img-8.avif",
     "rating": 4.9,
+    "images": [
+      "../images/img-7.avif",
+      "../images/img-6.avif",
+      "../images/img-8.avif"
+    ],
     "price": 499,
-    "discountedPrice": 499
+    "discountPercentage": 0
   },
   {
     "id": 5,
@@ -57,8 +76,13 @@
     "image2": "../images/Frizz-2.avif",
     "image3": "../images/Frizz-3.avif",
     "rating": 3.1,
+    "images": [
+      "../images/Frizz-1.avif",
+      "../images/Frizz-2.avif",
+      "../images/Frizz-3.avif"
+    ],
     "price": 690,
-    "discountedPrice": 500
+    "discountPercentage": 10
   },
   {
     "id": 6,
@@ -69,7 +93,12 @@
     "image2": "../images/dandruf-2.avif",
     "image3": "../images/dandruf-3.avif",
     "rating": 3.6,
+    "images": [
+      "../images/dandruf-1.avif",
+      "../images/dandruf-2.avif",
+      "../images/dandruf-3.avif"
+    ],
     "price": 350,
-    "discountedPrice": 299
+    "discountPercentage": 10
   }
 ]
